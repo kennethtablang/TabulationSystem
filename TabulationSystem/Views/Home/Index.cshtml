@@ -1,0 +1,92 @@
+﻿@{
+    ViewData["Title"] = "Welcome";
+}
+
+<style>
+    body {
+        font-family: 'Segoe UI', sans-serif;
+        background-color: #f8f9fa;
+    }
+
+    .hero-section {
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(to right, #ffffff, #f8f9fa);
+    }
+
+    .hero-content {
+        max-width: 700px;
+        text-align: center;
+    }
+
+    .hero-content h1 {
+        font-size: 3rem;
+        font-weight: bold;
+        color: #343a40;
+    }
+
+    .hero-content p {
+        font-size: 1.25rem;
+        color: #6c757d;
+    }
+
+    .btn-custom {
+        padding: 12px 30px;
+        font-size: 1.1rem;
+        border-radius: 30px;
+        background-color: #007bff;
+        color: #ffffff;
+        transition: 0.3s;
+        text-decoration: none;
+    }
+
+    .btn-custom:hover {
+        background-color: #0056b3;
+        color: #ffffff;
+    }
+
+    .features {
+        padding: 80px 0;
+    }
+
+    .feature-box {
+        text-align: center;
+        padding: 20px;
+    }
+
+    .feature-box h3 {
+        font-weight: 600;
+        color: #343a40;
+    }
+
+    .feature-box p {
+        color: #6c757d;
+    }
+</style>
+
+<div class="hero-section">
+    <div class="hero-content">
+        <h1>Welcome to Tabulation System</h1>
+        <p>Simplifying tabulation with precision and efficiency.</p>
+        <a href="/Identity/Account/Login" class="btn btn-custom mt-3">Get Started</a>
+    </div>
+</div>
+
+<div class="container text-center features">
+    <div class="row">
+        <div class="col-md-4 feature-box">
+            <h3>Fast & Accurate</h3>
+            <p>Experience seamless and error-free tabulation.</p>
+        </div>
+        <div class="col-md-4 feature-box">
+            <h3>User-Friendly</h3>
+            <p>An intuitive and elegant interface for smooth navigation.</p>
+        </div>
+        <div class="col-md-4 feature-box">
+            <h3>Secure & Reliable</h3>
+            <p>Your data is protected with robust security measures.</p>
+        </div>
+    </div>
+</div>
