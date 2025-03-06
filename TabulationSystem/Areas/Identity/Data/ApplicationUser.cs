@@ -21,10 +21,8 @@ public class ApplicationUser : IdentityUser
     [MaxLength(50)]
     public string LastName { get; set; }
 
-    public byte[] ProfilePicture { get; set; } = new byte[0];
+    public byte[]? ProfilePicture { get; set; }
 
     public DateTime DateTimeCreated { get; set; } = DateTime.Now;
     public DateTime DateTimeUpdated { get; set; } = DateTime.Now;
-
 }
-

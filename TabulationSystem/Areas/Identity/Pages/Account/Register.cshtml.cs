@@ -110,6 +110,20 @@ namespace TabulationSystem.Areas.Identity.Pages.Account
                 {
                     _logger.LogInformation("User created a new account with password.");
 
+                    //Assign the default role "Judge"
+                    if (!await _userManager.IsInRoleAsync(user, "Judge"))
+                    {
+                        var roleResult = await _userManager.AddToRoleAsync(user, "Judge");
+                        if (roleResult.Succeeded)
+                        {
+                            _logger.LogInformation($"User {user.Email} assigned to role: Judge.");
+                        }
+                        else
+                        {
+                            _logger.LogWarning($"Failed to assign role 'Judge' to user {user.Email}: {string.Join(", ", roleResult.Errors.Select(e => e.Description))}");
+                        }
+                    }
+
                     if (!_userManager.Options.SignIn.RequireConfirmedAccount)
                     {
                         await _signInManager.SignInAsync(user, isPersistent: false);
