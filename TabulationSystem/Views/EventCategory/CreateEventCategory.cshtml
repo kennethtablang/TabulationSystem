@@ -1,0 +1,125 @@
+﻿@model TabulationSystem.Models.EventCategory
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Create Event Category";
+}
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Create Event Category</h2>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="@Url.Action("Dashboard", "Home")">Home</a>
+            </li>
+            <li class="breadcrumb-item">
+                <a>Event Category</a>
+            </li>
+            <li class="active breadcrumb-item">
+                <strong>Create Event Category</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2">
+    </div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>Create Event Category <small>Fill out the required information below.</small></h5>
+                </div>
+                <div class="ibox-content">
+                    <!-- Updated form: Note the asp-action is now "Create" -->
+                    <form method="post" asp-action="CreateEventCategory" asp-controller="EventCategory">
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Select Event</label>
+                            <div class="col-sm-10">
+                                <select asp-for="EventId" class="form-control" asp-items="@ViewBag.Events">
+                                    <option value="">-- Select Event --</option>
+                                </select>
+                                <span asp-validation-for="EventId" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="hr-line-dashed"></div>
+
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Category Name</label>
+                            <div class="col-sm-10">
+                                <input asp-for="CategoryName" class="form-control" />
+                                <span asp-validation-for="CategoryName" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="hr-line-dashed"></div>
+
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Description</label>
+                            <div class="col-sm-10">
+                                <textarea asp-for="Description" class="form-control" rows="3"></textarea>
+                                <span asp-validation-for="Description" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="hr-line-dashed"></div>
+
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Score Type</label>
+                            <div class="col-sm-10">
+                                <select asp-for="ScoreType" class="form-control">
+                                    <option value="Percentage">Percentage</option>
+                                    <option value="Points">Points</option>
+                                    <option value="Rank">Rank</option>
+                                </select>
+                                <span asp-validation-for="ScoreType" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="hr-line-dashed"></div>
+
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Category Percentage</label>
+                            <div class="col-sm-10">
+                                <input asp-for="CategoryPercentage" type="number" class="form-control" min="0" max="100" step="0.01" />
+                                <small class="form-text text-muted">Specify the percentage contribution of this category to the total event score.</small>
+                                <span asp-validation-for="CategoryPercentage" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="hr-line-dashed"></div>
+
+                        <div class="form-group row">
+                            <div class="col-sm-4 col-sm-offset-2">
+                                <a asp-action="Index" asp-controller="EventCategory" class="btn btn-white btn-sm">Cancel</a>
+                                <button type="submit" class="btn btn-primary btn-sm">Save Event Category</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Styles {
+    <link rel="stylesheet" href="~/lib/iCheck/custom.css" />
+    <link rel="stylesheet" href="~/lib/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css" />
+}
+
+@section Scripts {
+    <environment names="Development,Staging,Production">
+        <script src="~/lib/iCheck/icheck.min.js"></script>
+    </environment>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.i-checks').iCheck({
+                checkboxClass: 'icheckbox_square-green',
+                radioClass: 'iradio_square-green',
+            });
+        });
+    </script>
+}

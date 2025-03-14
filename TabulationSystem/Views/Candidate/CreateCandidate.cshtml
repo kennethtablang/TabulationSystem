@@ -1,0 +1,163 @@
+﻿@model TabulationSystem.Models.Candidate
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Register Candidates";
+}
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Register New Candidate</h2>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="@Url.Action("Dashboard", "Home")">Home</a>
+            </li>
+            <li class="breadcrumb-item">
+                <a>Candidates</a>
+            </li>
+            <li class="active breadcrumb-item">
+                <strong>Register New Candidate</strong>
+            </li>
+        </ol>
+    </div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>Candidate Registration <small>Fill out the required information below.</small></h5>
+                </div>
+                <div class="ibox-content">
+                    <form method="post" asp-action="CreateCandidate" enctype="multipart/form-data">
+                        @Html.AntiForgeryToken()
+
+                        <!-- Candidate Number -->
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label" asp-for="CandidateNumber"></label>
+                            <div class="col-sm-10">
+                                <input asp-for="CandidateNumber" class="form-control" type="number" min="1" />
+                                <span asp-validation-for="CandidateNumber" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+                        <!-- First Name -->
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label" asp-for="FirstName"></label>
+                            <div class="col-sm-10">
+                                <input asp-for="FirstName" class="form-control" />
+                                <span asp-validation-for="FirstName" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+                        <!-- Middle Name -->
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label" asp-for="MiddleName"></label>
+                            <div class="col-sm-10">
+                                <input asp-for="MiddleName" class="form-control" />
+                                <span asp-validation-for="MiddleName" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+                        <!-- Last Name -->
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label" asp-for="LastName"></label>
+                            <div class="col-sm-10">
+                                <input asp-for="LastName" class="form-control" />
+                                <span asp-validation-for="LastName" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+                        <!-- Gender -->
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label" asp-for="Gender"></label>
+                            <div class="col-sm-10">
+                                <select asp-for="Gender" class="form-control" asp-items="Html.GetEnumSelectList<TabulationSystem.Models.Gender>()">
+                                    <option value="">-- Select Gender --</option>
+                                </select>
+                                <span asp-validation-for="Gender" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+                        <!-- Picture Upload -->
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Upload Picture</label>
+                            <div class="col-sm-10">
+                                <input type="file" name="PictureFile" class="form-control" accept="image/*" />
+                                <span class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+                        <!-- Description -->
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label" asp-for="Description"></label>
+                            <div class="col-sm-10">
+                                <textarea asp-for="Description" class="form-control" rows="3"></textarea>
+                                <span asp-validation-for="Description" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+                        <!-- Event Selection -->
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label" asp-for="EventId"></label>
+                            <div class="col-sm-10">
+                                <select asp-for="EventId" class="form-control" asp-items="@ViewBag.Events">
+                                    <option value="">-- Select Event --</option>
+                                </select>
+                                <span asp-validation-for="EventId" class="text-danger"></span>
+                            </div>
+                        </div>
+                         <div class="hr-line-dashed"></div>
+
+                        @* <!-- Year Selection (if needed) --> *@
+                        @* <div class="form-group row"> *@
+                        @*     <label class="col-sm-2 col-form-label" asp-for="YearId"></label> *@
+                        @*     <div class="col-sm-10"> *@
+                        @*         <select asp-for="YearId" class="form-control" asp-items="@ViewBag.Years"> *@
+                        @*              <option value="">-- Select Year --</option> *@
+                        @*         </select> *@
+                        @*         <span asp-validation-for="YearId" class="text-danger"></span> *@
+                        @*     </div> *@
+                        @* </div> *@
+                        @* <div class="hr-line-dashed"></div> *@
+
+                        <!-- Submit and Cancel Buttons -->
+                        <div class="form-group row">
+                            <div class="col-sm-4 col-sm-offset-2">
+                                <a asp-action="Index" class="btn btn-white btn-sm">Cancel</a>
+                                <button type="submit" class="btn btn-primary btn-sm">Register Candidate</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Styles {
+    <link rel="stylesheet" href="~/lib/iCheck/custom.css" />
+    <link rel="stylesheet" href="~/lib/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css" />
+}
+
+@section Scripts {
+    <environment names="Development,Staging,Production">
+        <script src="~/lib/iCheck/icheck.min.js"></script>
+    </environment>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.i-checks').iCheck({
+                checkboxClass: 'icheckbox_square-green',
+                radioClass: 'iradio_square-green',
+            });
+        });
+    </script>
+}

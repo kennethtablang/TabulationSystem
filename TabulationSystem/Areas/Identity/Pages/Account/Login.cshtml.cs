@@ -97,7 +97,23 @@ namespace TabulationSystem.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
-                    return LocalRedirect(returnUrl);
+
+                    // Redirect based on role
+                    if (await _userManager.IsInRoleAsync(user, "Admin"))
+                    {
+                        return RedirectToAction("Index", "Dashboard");
+                    }
+                    else if (await _userManager.IsInRoleAsync(user, "Judge"))
+                    {
+                        return RedirectToAction("Index", "JudgeDashboard");
+                    }
+                    else
+                    {
+                        // If the role is unknown, log out and display error
+                        await _signInManager.SignOutAsync();
+                        ModelState.AddModelError(string.Empty, "You do not have access to this application.");
+                        return Page();
+                    }
                 }
                 if (result.RequiresTwoFactor)
                 {

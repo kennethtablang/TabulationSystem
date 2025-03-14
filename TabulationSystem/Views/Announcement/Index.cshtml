@@ -1,0 +1,24 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "List of Events";
+}
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Announcements</h2>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="@Url.Action("Dashboard", "Home")">Home</a>
+            </li>
+            <li class="breadcrumb-item">
+                <a>Announcement</a>
+            </li>
+            <li class="active breadcrumb-item">
+                <strong>List of Announcements</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2">
+        <a asp-action="CreateAnnouncement" class="btn btn-primary btn-sm float-right mt-3"><i class="fa fa-plus"></i> Create New Announcement</a>
+    </div>
+</div>

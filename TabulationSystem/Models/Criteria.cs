@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using TabulationSystem.Areas.Identity.Data;
 
 namespace TabulationSystem.Models
@@ -7,26 +9,40 @@ namespace TabulationSystem.Models
     {
         public int CriteriaId { get; set; }
 
-        [Required]
         [StringLength(200)]
-        public string CriteriaName { get; set; }
+        public string? CriteriaName { get; set; }
 
         [Range(0, 100)]
-        public decimal Percentage { get; set; }
+        [Precision(5, 2)]
+        public decimal CriteriaPercentage { get; set; }
 
         [StringLength(500)]
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
-        public DateTime DateCreated { get; set; } = DateTime.Now;
+        // The maximum points a judge can give is now equal to the criteria percentage itself
+        [NotMapped]
+        public int MaximumPoints => (int)Math.Round(CriteriaPercentage);
 
-        public DateTime DateUpdated { get; set; } = DateTime.Now;
+        public DateTime DateCreated { get; set; } = DateTime.UtcNow;
 
-        [Required]
-        public int ApplicationUserId { get; set; }
+        public DateTime DateUpdated { get; set; } = DateTime.UtcNow;
+
+        public string? ApplicationUserId { get; set; }
+
+        //Foreign Key for EventCategory
+        [Required]  //Ensures every Criteria belongs to an Event Category
+        public int EventCategoryId { get; set; }
+
+        //[Required]
+        //public int CategoryId { get; set; }
 
         // Navigation properties
-        public ApplicationUser AdminUser { get; set; }
-        public ICollection<Score> Scores { get; set; } = new List<Score>();
+        [ForeignKey("ApplicationUserId")]
+        public ApplicationUser? AdminUser { get; set; }
 
+        [ForeignKey("CategoryId")]
+        public EventCategory? Category { get; set; }
+
+        public ICollection<Score> Scores { get; set; } = new List<Score>();
     }
 }

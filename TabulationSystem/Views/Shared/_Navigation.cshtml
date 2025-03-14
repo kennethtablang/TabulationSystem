@@ -7,9 +7,15 @@
 @{
     var user = await UserManager.GetUserAsync(User);
 
-    var FullName = user.FirstName + " " + user.LastName;
-    var userName = user != null ? FullName : "Guest";
-    var userRole = user != null ? string.Join(", ", await UserManager.GetRolesAsync(user)) : "User";
+    // var FullName = user.FirstName + " " + user.LastName;
+    //var userName = user != null ? FullName : "Guest";
+    //var userRole = user != null ? string.Join(", ", await UserManager.GetRolesAsync(user)) : "User";
+    var fullName = user != null
+                       ? $"{user.FirstName ?? ""} {user.LastName ?? ""}".Trim()
+                       : "Guest";
+    var userRole = user != null
+                       ? string.Join(", ", await UserManager.GetRolesAsync(user))
+                       : "User";
 }
 
 <nav class="navbar-default navbar-static-side" role="navigation">
@@ -17,9 +23,9 @@
         <ul class="nav metismenu" id="side-menu">
             <li class="nav-header">
                 <div class="dropdown profile-element">
-                    <img alt="image" class="rounded-circle" src="~/Images/profile_small.jpg" />
+                    <img alt="image" class="rounded-circle" src="~/Images/adminprofile.png" style="width: 50px; height: 50px; object-fit: cover;" />
                     <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                        <span class="block m-t-xs font-bold">@userName</span>
+                        <span class="block m-t-xs font-bold">@fullName</span>
                         <span class="text-muted text-xs block">@userRole <b class="caret"></b></span>
                     </a>
                     <ul class="dropdown-menu animated fadeInRight m-t-xs">
@@ -41,44 +47,68 @@
                 <a href="@Url.Action("Index", "Dashboard")"><i class="fa fa-th-large"></i> <span class="nav-label">Dashboard</span></a>
             </li>
 
+            <!-- Manage Event -->
+            <li class="@Html.IsSelected(controller: "ManageEvent")">
+                <a href="#"><i class="fa fa-calendar-check-o"></i> <span class="nav-label">Manage Events</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse @Html.IsSelected(controller: "ManageEvent", cssClass: "in")">
+                    <li><a href="@Url.Action("CreateEvent", "ManageEvent")"><i class="fa fa-plus-square"></i> Create New Event</a></li>
+                    <li><a href="@Url.Action("Index", "ManageEvent")"><i class="fa fa-eye"></i> View Events</a></li>
+                    <li><a href="@Url.Action("ArchivedEvent", "ManageEvent")"><i class="fa fa-archive"></i> Archived Events</a></li>
+                </ul>
+            </li>
+
             <!-- Manage Users -->
             <li class="@Html.IsSelected(controller: "ManageUser")">
                 <a href="#"><i class="fa fa-users"></i> <span class="nav-label">Manage Users</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse @Html.IsSelected(controller: "ManageUser", cssClass: "in")">
-                    <li><a href="@Url.Action("Index", "Judges")">Judges</a></li>
-                    <li><a href="@Url.Action("Index", "Managers")">Managers</a></li>
-                    <li><a href="@Url.Action("Index", "Admins")">Admins</a></li>
+                    <li><a href="@Url.Action("Judge", "ManageUser")">Judges</a></li>
+                    <li><a href="@Url.Action("RegisterJudge", "ManageUser")">Register Judge</a></li>
+                    <li><a href="@Url.Action("Manager", "ManageUser")">Managers</a></li>
+                    <li><a href="@Url.Action("Admin", "ManageUser")">Admins</a></li>
                 </ul>
             </li>
 
-            <!-- Manage Contests -->
-            <li class="@Html.IsSelected(controller: "ManageContest")">
-                <a href="#"><i class="fa fa-trophy"></i> <span class="nav-label">Manage Contests</span><span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level collapse @Html.IsSelected(controller: "ManageContest", cssClass: "in")">
-                    <li><a href="@Url.Action("Create", "ManageContest")">Create New Contest</a></li>
-                    <li><a href="@Url.Action("Index", "ManageContest")">View Contests</a></li>
-                    <li><a href="@Url.Action("Archived", "ManageContest")">Archived Contests</a></li>
+            <!-- Event Category -->
+            <li class="@Html.IsSelected(controller: "EventCategory")">
+                <a href="#"><i class="fa fa-list-alt"></i> <span class="nav-label">Event Category</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse @Html.IsSelected(controller: "EventCategory", cssClass: "in")">
+                    <li><a href="@Url.Action("CreateEventCategory", "EventCategory")"><i class="fa fa-plus-square"></i> Create Category</a></li>
+                    <li><a href="@Url.Action("Index", "EventCategory")"><i class="fa fa-list"></i> Category List</a></li>
                 </ul>
             </li>
 
-            <!-- Judging Criteria -->
-            <li class="@Html.IsSelected(controller: "JudgingCriteria")">
-                <a href="@Url.Action("Index", "JudgingCriteria")"><i class="fa fa-balance-scale"></i> <span class="nav-label">Judging Criteria</span></a>
+            <!-- Criteria -->
+            <li class="@Html.IsSelected(controller: "Criteria")">
+                <a href="#"><i class="fa fa-tasks"></i> <span class="nav-label">Category Criteria</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse @Html.IsSelected(controller: "Criteria", cssClass: "in")">
+                    <li><a href="@Url.Action("CreateCriteria", "Criteria")"><i class="fa fa-plus-square"></i> Create New Criteria</a></li>
+                    <li><a href="@Url.Action("Index", "Criteria")"><i class="fa fa-eye"></i> View Criteria</a></li>
+                </ul>
             </li>
+
+            <!-- Candidates -->
+            <li class="@Html.IsSelected(controller: "Candidate")">
+                <a href="#"><i class="fa fa-users"></i> <span class="nav-label">Candidates</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse @Html.IsSelected(controller: "Candidate", cssClass: "in")">
+                    <li><a href="@Url.Action("CreateCandidate", "Candidate")"><i class="fa fa-user-plus"></i> Add New Candidate</a></li>
+                    <li><a href="@Url.Action("Index", "Candidate")"><i class="fa fa-eye"></i> View Candidates</a></li>
+                </ul>
+            </li>
+
 
             <!-- Scoring & Results -->
             <li class="@Html.IsSelected(controller: "Scoring")">
                 <a href="#"><i class="fa fa-calculator"></i> <span class="nav-label">Scoring & Results</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse @Html.IsSelected(controller: "Scoring", cssClass: "in")">
+                    <li><a href="@Url.Action("Index", "Scoring")">Live Results</a></li>
                     <li><a href="@Url.Action("EnterScores", "Scoring")">Enter Scores</a></li>
-                    <li><a href="@Url.Action("LiveResults", "Scoring")">Live Results</a></li>
                     <li><a href="@Url.Action("FinalRankings", "Scoring")">Final Rankings</a></li>
                 </ul>
             </li>
 
             <!-- Generate Reports -->
-            <li class="@Html.IsSelected(controller: "Reports")">
-                <a href="@Url.Action("Index", "Reports")"><i class="fa fa-pie-chart"></i> <span class="nav-label">Generate Reports</span></a>
+            <li class="@Html.IsSelected(controller: "GenerateReports")">
+                <a href="@Url.Action("Index", "GenerateReports")"><i class="fa fa-pie-chart"></i> <span class="nav-label">Generate Reports</span></a>
             </li>
 
             <!-- Audit Logs -->

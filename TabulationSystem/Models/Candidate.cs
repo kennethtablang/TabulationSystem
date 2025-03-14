@@ -13,45 +13,67 @@ namespace TabulationSystem.Models
 
     public class Candidate
     {
+
+        public Candidate()
+        {
+            YearId = 2025;
+            Gender = Gender.Female;
+        }
+
         public int CandidateId { get; set; }
 
         [Required]
-        [StringLength(100)]
-        public string FirstName { get; set; }
-
-        [StringLength(100)]
-        public string MiddleName { get; set; }
+        [Range(1, 100)]
+        public int CandidateNumber { get; set; }
 
         [Required]
-        [StringLength(100)]
+        [StringLength(50)]
+        public string FirstName { get; set; }
+
+        [StringLength(50)]
+        public string? MiddleName { get; set; }
+
+        [Required]
+        [StringLength(50)]
         public string LastName { get; set; }
+
+        [NotMapped]
+        public string FullName => $"{FirstName} {(MiddleName ?? "").Trim()} {LastName}".Trim();
 
         [Required]
         public Gender Gender { get; set; }
 
-        public bool Status { get; set; } = true;
+        public bool? Status { get; set; } = true;
+
+        // New properties for image handling
+        public byte[]? Picture { get; set; } // Store image as binary data
 
         [NotMapped]
-        public IFormFile Picture { get; set; }
+        public IFormFile? PictureFile { get; set; } // Handle file uploads in the form
 
-        [StringLength(500)]
-        public string Description { get; set; }
+        [StringLength(1000)]
+        public string? Description { get; set; }
 
-        public DateTime DateCreated { get; set; } = DateTime.Now;
+        public DateTime DateCreated { get; set; } = DateTime.UtcNow;
+        public DateTime DateUpdated { get; set; } = DateTime.UtcNow;
 
-        public DateTime DateUpdated { get; set; } = DateTime.Now;
-
-        [Required]
-        public int YearId { get; set; }
+        public int? YearId { get; set; }
 
         [Required]
-        public int ApplicationUserId { get; set; }
+        public int EventId { get; set; }
+
+        public string? ApplicationUserId { get; set; }
 
         // Navigation properties
-        public Year Year { get; set; }
-        public ApplicationUser AdminUser { get; set; }
-        public ICollection<Score> Scores { get; set; }
-        //public object Years { get; internal set; }
+        [ForeignKey("YearId")]
+        public Year? Year { get; set; }
 
+        [ForeignKey("ApplicationUserId")]
+        public ApplicationUser? AdminUser { get; set; }
+
+        [ForeignKey("EventId")]
+        public Event? Event { get; set; }
+
+        public ICollection<Score> Scores { get; set; } = new List<Score>();
     }
 }
