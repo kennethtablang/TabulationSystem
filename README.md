@@ -1,6 +1,12 @@
 # Tabulation System
+# Tabulation System
 
-![C#](https://upload.wikimedia.org/wikipedia/commons/4/4f/Csharp_Logo.png) ![.NET](https://upload.wikimedia.org/wikipedia/commons/7/7d/Microsoft_.NET_logo.png) ![MVC](https://upload.wikimedia.org/wikipedia/commons/a/ab/ASP.NET_logo.png) ![CSS](https://upload.wikimedia.org/wikipedia/commons/6/62/CSS3_logo.svg) ![Bootstrap](https://upload.wikimedia.org/wikipedia/commons/b/b2/Bootstrap_logo.svg) ![Inspinia](https://your-inspinia-logo-url.com)
+<p align="center">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/b/bd/Logo_C_sharp.svg" alt="C#" width="50" height="50" />
+  <img src="https://upload.wikimedia.org/wikipedia/commons/7/7d/Microsoft_.NET_logo.svg" alt=".NET" width="50" height="50" />
+  <img src="https://upload.wikimedia.org/wikipedia/commons/6/62/CSS3_logo.svg" alt="CSS" width="50" height="50" />
+  <img src="https://upload.wikimedia.org/wikipedia/commons/b/b2/Bootstrap_logo.svg" alt="Bootstrap" width="50" height="50" />
+</p>
 
 # Tabulation System
 
