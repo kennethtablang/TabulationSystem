@@ -1,14 +1,12 @@
 # Tabulation System
-# Tabulation System
 
 <p align="center">
   <img src="https://upload.wikimedia.org/wikipedia/commons/b/bd/Logo_C_sharp.svg" alt="C#" width="50" height="50" />
   <img src="https://upload.wikimedia.org/wikipedia/commons/7/7d/Microsoft_.NET_logo.svg" alt=".NET" width="50" height="50" />
   <img src="https://upload.wikimedia.org/wikipedia/commons/6/62/CSS3_logo.svg" alt="CSS" width="50" height="50" />
   <img src="https://upload.wikimedia.org/wikipedia/commons/b/b2/Bootstrap_logo.svg" alt="Bootstrap" width="50" height="50" />
+  <img src="https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png" alt="Bootstrap" width="50" height="50" />
 </p>
-
-# Tabulation System
 
 ## Overview
 The **Tabulation System** is a web application developed using **ASP.NET Core MVC**. This system is designed to facilitate the management and computation of scores for various events, competitions, or any structured scoring system. It provides an efficient and user-friendly interface for judges, organizers, and participants.
