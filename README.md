@@ -3,9 +3,15 @@
 <p align="center">
   <img src="https://upload.wikimedia.org/wikipedia/commons/b/bd/Logo_C_sharp.svg" alt="C#" width="50" height="50" />
   <img src="https://upload.wikimedia.org/wikipedia/commons/7/7d/Microsoft_.NET_logo.svg" alt=".NET" width="50" height="50" />
+  <img src="https://upload.wikimedia.org/wikipedia/commons/d/d0/Blazor.png" alt=".NET" width="50" height="50" />
+  <img src="https://sd.blackball.lv/data/items/18808/signalr.png" alt="SignalR" width="140" height="50" />
+  <img src="https://static.wikia.nocookie.net/logopedia/images/e/ea/Ms-sqlserver-logo-2012.svg/revision/latest?cb=20241103235451" alt=".NET" width="120" height="50" />
+  <img src="https://skillabilitysoft.com/wp-content/uploads/2023/10/razor.png" alt=".NET" width="100" height="50" />
   <img src="https://upload.wikimedia.org/wikipedia/commons/6/62/CSS3_logo.svg" alt="CSS" width="50" height="50" />
   <img src="https://upload.wikimedia.org/wikipedia/commons/b/b2/Bootstrap_logo.svg" alt="Bootstrap" width="50" height="50" />
   <img src="https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png" alt="Bootstrap" width="50" height="50" />
+  <img src="https://upload.wikimedia.org/wikipedia/commons/d/d3/Logo_jQuery.svg" alt="Bootstrap" width="100" height="50" />
+  <img src="https://www.sectigo.com/uploads/images/_950xAUTO_fit_center-center_none/ms-iis-large.png" alt="Bootstrap" width="100" height="50" />
 </p>
 
 ## Overview
