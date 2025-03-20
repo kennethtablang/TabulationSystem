@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace TabulationSystem.Models.ViewModels
+﻿namespace TabulationSystem.Models.ViewModels
 {
     public class CriteriaViewModel
     {
@@ -10,5 +8,6 @@ namespace TabulationSystem.Models.ViewModels
         public decimal Percentage { get; set; }
         public string CategoryName { get; set; }
         public int EventCategoryId { get; set; }
+        public int MaxScore { get; set; }
     }
 }
