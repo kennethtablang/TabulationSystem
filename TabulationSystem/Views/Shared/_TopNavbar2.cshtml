@@ -1,62 +1,32 @@
-﻿<div class="row border-bottom white-bg">
-    <nav class="navbar navbar-expand-lg navbar-static-top" role="navigation">
-        <a href="#" class="navbar-brand">Tabulation System</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-label="Toggle navigation">
-            <i class="fa fa-reorder"></i>
-        </button>
-        <div class="navbar-collapse collapse" id="navbar">
-            <ul class="nav navbar-nav mr-auto">
-                <li class="active">
-                    <a aria-expanded="false" role="button" href="@Url.Action("Index", "JudgeDashboard")"> Back to main Layout page</a>
-                </li>
-                <li class="dropdown">
-                    <a aria-expanded="false" role="button" href="#" class="dropdown-toggle" data-toggle="dropdown"> Menu item</a>
-                    <ul role="menu" class="dropdown-menu">
-                        <li><a href="">Menu item</a></li>
-                        <li><a href="">Menu item</a></li>
-                        <li><a href="">Menu item</a></li>
-                        <li><a href="">Menu item</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a aria-expanded="false" role="button" href="#" class="dropdown-toggle" data-toggle="dropdown"> Menu item</a>
-                    <ul role="menu" class="dropdown-menu">
-                        <li><a href="">Menu item</a></li>
-                        <li><a href="">Menu item</a></li>
-                        <li><a href="">Menu item</a></li>
-                        <li><a href="">Menu item</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a aria-expanded="false" role="button" href="#" class="dropdown-toggle" data-toggle="dropdown"> Menu item</a>
-                    <ul role="menu" class="dropdown-menu">
-                        <li><a href="">Menu item</a></li>
-                        <li><a href="">Menu item</a></li>
-                        <li><a href="">Menu item</a></li>
-                        <li><a href="">Menu item</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a aria-expanded="false" role="button" href="#" class="dropdown-toggle" data-toggle="dropdown"> Menu item</a>
-                    <ul role="menu" class="dropdown-menu">
-                        <li><a href="">Menu item</a></li>
-                        <li><a href="">Menu item</a></li>
-                        <li><a href="">Menu item</a></li>
-                        <li><a href="">Menu item</a></li>
-                    </ul>
-                </li>
-
-            </ul>
-            <ul class="nav navbar-top-links navbar-right">
-                <li>
-                    <form asp-area="Identity" asp-page="/Account/Logout" method="post" id="logoutForm">
-                        <a href="javascript:void(0);" onclick="document.getElementById('logoutForm').submit();">
-                            <i class="fa fa-sign-out"></i> Log out
-                        </a>
-                    </form>
-                </li>
-            </ul>
-
+﻿<div class="row border-bottom">
+    <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+        <div class="navbar-header">
+            <a class="navbar-minimalize minimalize-styl-2 btn btn-primary" href="@Url.Action("Index", "JudgeDashboard")"> Judge Dashboard</a>
         </div>
+        <ul class="nav navbar-top-links navbar-right">
+            <li style="padding:20px">
+                <a class="btn btn-link nav-link" asp-controller="JudgeDashboard" asp-action="EnterScores" asp-route-eventId="@Model.EventId" style="border: none; background: none; padding: 0; color: inherit;">
+                    <i class="fa fa-pencil"></i> Enter Scores
+                </a>
+            </li>
+            <li style="padding:20px">
+                <a class="btn btn-link nav-link" asp-controller="JudgeDashboard" asp-action="LiveResult" asp-route-eventId="@Model.EventId" style="border: none; background: none; padding: 0; color: inherit;">
+                    <i class="fa fa-list-alt"></i> Result
+                </a>
+            </li>
+            <li style="padding:20px">
+
+                <a class="btn btn-link nav-link" asp-controller="JudgeDashboard" asp-action="FinalRankings" asp-route-eventId="@Model.EventId" style="border: none; background: none; padding: 0; color: inherit;">
+                    <i class="fa fa-list-alt"></i> Final Ranking
+                </a>
+            </li>
+            <li style="padding:20px">
+                <form method="post" asp-area="Identity" asp-page="/Account/Logout" id="logoutForm">
+                    <button type="submit" class="btn btn-link nav-link" style="border: none; background: none; padding: 0; color: inherit;">
+                        <i class="fa fa-sign-out"></i> Log out
+                    </button>
+                </form>
+            </li>
+        </ul>
     </nav>
 </div>
