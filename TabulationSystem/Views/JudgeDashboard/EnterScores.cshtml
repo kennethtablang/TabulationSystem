@@ -1,0 +1,146 @@
+﻿@model TabulationSystem.Models.ViewModels.EnterScoresViewModel
+@{
+    Layout = "~/Views/Shared/_Layout_2.cshtml";
+    ViewData["Title"] = "Scoring and Results";
+}
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Enter Scores</h2>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="@Url.Action("Index", "JudgeDashboard")">Home</a>
+            </li>
+            <li class="breadcrumb-item">
+                <a>Scoring and Results</a>
+            </li>
+            <li class="active breadcrumb-item">
+                <strong>Enter Scores</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2">
+        <a asp-action="FinalRankings" class="btn btn-primary btn-sm float-right mt-3">
+            <i class="fa fa-list-ol"></i> Final Rankings
+        </a>
+    </div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight ecommerce">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="tabs-container">
+                <ul class="nav nav-tabs">
+                    @if (Model?.Categories != null && Model.Categories.Any())
+                    {
+                        @foreach (var category in Model.Categories)
+                        {
+                            <li>
+                                <a class="nav-link @(category == Model.Categories.First() ? "active" : "")" data-toggle="tab" href="#tab-@category.EventCategoryId">
+                                    @category.CategoryName
+                                </a>
+                            </li>
+                        }
+                    }
+                </ul>
+                <div class="tab-content">
+                    @if (Model?.Categories != null && Model.Categories.Any())
+                    {
+                        @foreach (var category in Model.Categories)
+                        {
+                            <div id="tab-@category.EventCategoryId" class="tab-pane @(category == Model.Categories.First() ? "active" : "")">
+                                <div class="panel-body">
+                                    <h3>@category.CategoryName</h3>
+                                    <form method="post" asp-action="SaveScores">
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <th style="text-align: center;">#</th>
+                                                        <th style="text-align: center;">Name</th>
+                                                        <th style="text-align: center;">Image</th>
+                                                        @if (category.Criteria != null && category.Criteria.Any())
+                                                        {
+                                                            @foreach (var criteria in category.Criteria)
+                                                            {
+                                                                <th>@criteria.CriteriaName (@criteria.Percentage%)</th>
+                                                            }
+                                                        }
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @if (Model?.Candidates != null && Model.Candidates.Any())
+                                                    {
+                                                        @foreach (var candidate in Model.Candidates)
+                                                        {
+                                                            <tr>
+                                                                <td style="text-align: center; font-weight: bold;">@candidate.CandidateNumber</td>
+                                                                <td style="text-align: center;">@candidate.FullName</td>
+                                                                <td style="text-align: center;">
+                                                                    <img src="@(string.IsNullOrEmpty(candidate.PhotoPath) ? "/images/placeholder.jpg" : candidate.PhotoPath)" class="img-thumbnail" style="width: 50px; height: 50px;" />
+                                                                </td>
+                                                                @if (category.Criteria != null && category.Criteria.Any())
+                                                                {
+                                                                    @foreach (var criteria in category.Criteria)
+                                                                    {
+                                                                        var score = Model.Scores?.FirstOrDefault(s => s.CandidateId == candidate.CandidateId && s.CriteriaId == criteria.CriteriaId);
+                                                                        <td style="text-align: center;">
+                                                                            <input type="hidden" name="Scores.Index" value="@Model.Scores?.IndexOf(score)" />
+                                                                            <input type="hidden" name="Scores[@Model.Scores?.IndexOf(score)].CandidateId" value="@candidate.CandidateId" />
+                                                                            <input type="hidden" name="Scores[@Model.Scores?.IndexOf(score)].CriteriaId" value="@criteria.CriteriaId" />
+                                                                            <input type="number" class="form-control" name="Scores[@Model.Scores?.IndexOf(score)].Score" value="@score?.Score" min="0" max="@criteria.MaxScore" required style="text-align: center; font-weight: bold;" />
+                                                                        </td>
+                                                                    }
+                                                                }
+                                                            </tr>
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+                                                        <tr>
+                                                            <td colspan="4" style="text-align: center;">No Candidates Available</td>
+                                                        </tr>
+                                                    }
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <button type="submit" class="btn btn-success mt-3" style="padding: 10px 15px;">Save Scores</button>
+                                    </form>
+                                </div>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <div class="tab-pane active">
+                            <div class="panel-body">
+                                <h3 style="text-align: center;">No Categories Available</h3>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Styles {
+    <environment names="Development,Staging,Production">
+        <link rel="stylesheet" href="~/lib/summernote/summernote-bs4.css" />
+    </environment>
+}
+
+@section Scripts {
+    <environment names="Development,Staging,Production">
+        <script src="~/lib/summernote/summernote-bs4.js"></script>
+    </environment>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.summernote').summernote();
+            $('.nav-tabs a').click(function (e) {
+                e.preventDefault();
+                $(this).tab('show');
+            });
+        });
+    </script>
+}
