@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TabulationSystem.Data;
 using TabulationSystem.Models;
@@ -6,6 +7,7 @@ using TabulationSystem.Models.ViewModels;
 
 namespace TabulationSystem.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class ScoringController : Controller
     {
         private readonly ApplicationDbContext _context;

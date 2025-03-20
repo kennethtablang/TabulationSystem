@@ -48,12 +48,21 @@ namespace TabulationSystem.Controllers
                                 join userRole in _context.UserRoles on user.Id equals userRole.UserId
                                 join role in _context.Roles on userRole.RoleId equals role.Id
                                 where role.Name == "Judge"
+                                // left join with EventAssignments
+                                join assignment in _context.EventAssignments on user.Id equals assignment.UserId into assignmentGroup
+                                from assignment in assignmentGroup.DefaultIfEmpty()
+                                // left join with Events to get event name
+                                join ev in _context.Events on assignment.EventId equals ev.EventId into eventGroup
+                                from ev in eventGroup.DefaultIfEmpty()
                                 select new JudgeAssignmentViewModel
                                 {
                                     UserId = user.Id,
                                     FirstName = user.FirstName,
                                     MiddleName = user.MiddleName,
-                                    LastName = user.LastName
+                                    LastName = user.LastName,
+                                    Email = user.Email,
+                                    // If there is an event assignment, set EventName; otherwise "None"
+                                    EventName = ev != null ? ev.EventName : "None"
                                 })
                                 .ToListAsync();
 
